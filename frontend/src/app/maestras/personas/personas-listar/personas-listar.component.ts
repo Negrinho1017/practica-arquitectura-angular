@@ -12,35 +12,38 @@ import { NotificacionService } from 'src/app/shared/notificacion/notificacion.se
 export class PersonasListarComponent implements OnInit {
   personas: Persona[];
   persona: Persona;
-  constructor( private personasServiceService: PersonasServiceService, private router: Router,
-    private notificacion: NotificacionService ) { }
+  constructor(private personasServiceService: PersonasServiceService, private router: Router,
+    private notificacion: NotificacionService) { }
 
   ngOnInit() {
     this.obtenerPersonas();
   }
 
-  eliminarPersona(id: string){
-    this.personasServiceService.eliminarPersona(id).subscribe(() => {
-      this.notificacion.mensajeExitoso('Usuario eliminado'); 
+  eliminarPersona(id: string) {
+    this.personasServiceService.eliminarPersona(id).then(() => {
+      this.notificacion.mensajeExitoso('Usuario eliminado');
       this.router.navigate(['/personas']);
     });
   }
 
-  obtenerPersonas(){
-    this.personasServiceService.obtenerTodo().subscribe(res => this.personas = res);
+  obtenerPersonas() {
+    this.personasServiceService.obtenerTodo()
+    .then(res => this.personas = res)
+    .catch((error) => {
+      this.notificacion.mensajeError(error)
+    });
   }
 
-  obtenerPersona(){
-    var cedula= ((document.getElementById("cedula") as HTMLInputElement).value);
-    console.log(cedula);
-    this.personasServiceService.obtenerPersonaPorId(cedula).subscribe(res => {
+  obtenerPersona() {
+    var cedula = ((document.getElementById("cedula") as HTMLInputElement).value);
+    this.personasServiceService.obtenerPersonaPorId(cedula).then(res => {
       this.persona = res
-      if(this.persona===null){
+      if (this.persona === null) {
         this.notificacion.mensajeError("Usuario no encontrado");
         return;
       }
-      this.notificacion.mensajeExitoso("El nombre del usuario es: "+ this.persona.nombre+", su edad es: "+this.persona.edad+ " años y su sexo es: "+this.persona.sexo);
-    }, 
+      this.notificacion.mensajeExitoso("El nombre del usuario es: " + this.persona.nombre + ", su edad es: " + this.persona.edad + " años y su sexo es: " + this.persona.sexo);
+    },
       () => this.notificacion.mensajeError("Error encontrando el usuario"));
   }
 

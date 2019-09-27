@@ -21,14 +21,14 @@ export class PersonaComponent implements OnInit {
   }
 
   crearPersona() {
-    this.personasServiceService.crearPersona(this.persona).subscribe(() => {
+    this.personasServiceService.crearPersona(this.persona).then(() => {
       this.notificacionService.mensajeExitoso("Datos creados");
       this.router.navigate(['/personas']);
     });
   }
 
   actualizarPersona() {
-    this.personasServiceService.actualizarPersona(this.persona).subscribe(() => {
+    this.personasServiceService.actualizarPersona(this.persona).then(() => {
       this.notificacionService.mensajeExitoso("Datos actualizados");
       this.router.navigate(['/personas']);
     });
