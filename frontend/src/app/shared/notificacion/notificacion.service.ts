@@ -23,4 +23,14 @@ export class NotificacionService {
       text: mensaje
     })
   }
+
+  mensajeAceptarCancelar(mensaje: string){
+    return Swal.fire({
+      title: "Está seguro?",
+      text: mensaje,
+      type: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true     
+    })
+  }
 }

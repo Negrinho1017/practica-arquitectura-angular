@@ -3,6 +3,7 @@ import { ServicioBaseService } from 'src/app/shared/servicio-base.service';
 import { PersonasComponent } from '../personas.component';
 import { Persona } from '../modelo/Persona';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,11 +14,11 @@ const httpOptions = {
 })
 export class PersonasServiceService extends ServicioBaseService<Persona, string>{
 
-  queryAll: string = 'http://localhost:8080/consulta-todos';
-  queryPorId: string = 'http://localhost:8080/consulta-persona?id=';
-  queryCrear: string = 'http://localhost:8080/creacion-persona';
-  queryEliminar: string = 'http://localhost:8080/eliminacion-persona/';
-  queryActualizar: string = 'http://localhost:8080/actualizacion-persona/';
+  queryAll: string = `${environment.apiBaseURL}consulta-todos`;
+  queryPorId: string = `${environment.apiBaseURL}consulta-persona?id=`;
+  queryCrear: string = `${environment.apiBaseURL}creacion-persona`;
+  queryEliminar: string = `${environment.apiBaseURL}eliminacion-persona/`;
+  queryActualizar: string = `${environment.apiBaseURL}actualizacion-persona/`;
   
   constructor(private httpClient: HttpClient) {
     super(httpClient);

@@ -15,14 +15,19 @@
         <th>Nombre</th>
         <th>Edad</th>
         <th>Sexo</th>
-        <th>Eliminar</th>
+        <th></th>
     </tr>
     <tr *ngFor="let item of personas; let i = index">
         <td>{{item.id}}</td>
         <td>{{item.nombre}}</td>
         <td>{{item.edad}}</td>
         <td>{{item.sexo}}</td>
-        <td><i class="fa fa-trash" (click)="eliminarPersona(item.id)"></i></td>
+        <td>
+            <nav class="navbar navbar-light bg-light">
+                <i class="fa fa-trash" (click)="eliminarPersona(item.id)" title="Eliminar"></i>
+                <i class="fa fa-refresh" (click)="actualizarPersona(item.id)" title="Actualizar"></i>
+            </nav>
+        </td>
     </tr>
 </table>
 <button class="btn btn-dark" [routerLink]="['/personas']">Atrás</button>

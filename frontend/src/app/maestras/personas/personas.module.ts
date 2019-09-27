@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 const routes: Routes = [
   { path: '', component: PersonasComponent },
   { path: 'crear', component: PersonaComponent },
-  { path: 'editar', component: PersonaComponent },
+  { path: 'actualizar/:id', component: PersonaComponent },
   { path: 'lista-personas', component: PersonasListarComponent },
 ];
 @NgModule({

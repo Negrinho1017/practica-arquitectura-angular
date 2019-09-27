@@ -13,7 +13,7 @@ export abstract class ServicioBaseService<T, D>{
 
   constructor( private http: HttpClient ) { }
 
-  async obtenerTodo(query: string) {
+  obtenerTodo(query: string) {
      return new Promise<T[]>((resolve, reject) => {
        this.http.get<T[]>(query, httpOptions).toPromise()
        .then(response => {
